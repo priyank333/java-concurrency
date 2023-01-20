@@ -34,7 +34,6 @@ public class DataProcessor implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(this.processedCount.get());
         process();
     }
 }

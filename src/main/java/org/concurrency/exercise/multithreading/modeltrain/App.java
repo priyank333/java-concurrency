@@ -5,10 +5,12 @@ import java.util.concurrent.BlockingQueue;
 
 public class App {
     public static void main(String[] args) {
-        BlockingQueue<DataPackage> downloadedData = new ArrayBlockingQueue<>(10);
+        BlockingQueue<DataPackage> downloadedData = new ArrayBlockingQueue<>(Constants.QUEUE_SIZE);
         DownloadManager downloadManager = new DownloadManager();
-        downloadManager.startDownload(10, downloadedData);
-        ParallelDataProcessor parallelDataProcessor = new ParallelDataProcessor(downloadedData, 5, 10);
+        downloadManager.startDownload(Constants.DOWNLOAD_PACKAGE_COUNT, downloadedData);
+        ParallelDataProcessor parallelDataProcessor = new ParallelDataProcessor(downloadedData,
+                Constants.CONCURRENT_PROCESS_COUNT,
+                Constants.DOWNLOAD_PACKAGE_COUNT);
         parallelDataProcessor.process();
     }
 }
